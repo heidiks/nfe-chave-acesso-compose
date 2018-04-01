@@ -51,7 +51,7 @@
                   </md-table>
                </md-card-content>
                <md-card-actions>
-                  <md-button class="md-raised md-primary" @click="clear">Clear</md-button>
+                  <md-button class="md-raised md-primary" @click="clear">Limpar</md-button>
                </md-card-actions>
             </div>
          </md-card>
