@@ -1,20 +1,65 @@
 <template>
-  <div id="app">
-    <input type="text" @input="addItem" @change="addItem"v-model="text" maxlength="44" size="44">
-    <ul>
-      <li> UF/Estado: {{ nfe.uf }} </li>
-      <li> Ano: {{ nfe.ano }} </li>
-      <li> Mês: {{ nfe.mes }} </li>
-      <li> CNPJ: {{ nfe.cnpj }} </li>
-      <li> Modelo Documento: {{ nfe.modelo }} </li>
-      <li> Serie: {{ nfe.serie }} </li>
-      <li> Numero da NF-e: {{ nfe.numero }} </li>
-      <li> Tipo Emissao: {{ nfe.tipoEmissao }} </li>
-      <li> Codigo Numerico: {{ nfe.codigoNumerico }} </li>
-      <li> Digito Verificador: {{ nfe.digitoVerificador }} </li>
-    </ul>
-  </div>
+   <div class="md-layout">
+      <div class="md-layout-item"></div>
+      <div class="md-layout-item">
+         <md-card>
+            <div id="app">
+               <md-card-header >
+                  <md-field>
+                     <label>Chave de Acesso</label>
+                     <md-input v-model="text" @input="addItem" @change="addItem"  maxlength="44" size="44"></md-input>
+                  </md-field>
+               </md-card-header>
+               <md-card-content>
+                  <md-table>
+                     <md-table-row>
+                        <md-table-head>Descrição</md-table-head>
+                        <md-table-head>Valor</md-table-head>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>UF/Estado</md-table-cell>
+                        <md-table-cell>{{ nfe.uf }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>CNPJ</md-table-cell>
+                        <md-table-cell>{{ nfe.cnpj }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Modelo Documento</md-table-cell>
+                        <md-table-cell>{{ nfe.modelo }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Série</md-table-cell>
+                        <md-table-cell>{{ nfe.serie }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Numero da NF-e</md-table-cell>
+                        <md-table-cell>{{ nfe.numero }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Tipo Emissao</md-table-cell>
+                        <md-table-cell>{{ nfe.tipoEmissao }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Codigo Numerico</md-table-cell>
+                        <md-table-cell>{{ nfe.codigoNumerico }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Digito Verificador</md-table-cell>
+                        <md-table-cell>{{ nfe.digitoVerificador }}</md-table-cell>
+                     </md-table-row>
+                  </md-table>
+               </md-card-content>
+               <md-card-actions>
+                  <md-button class="md-raised md-primary" @click="clear">Clear</md-button>
+               </md-card-actions>
+            </div>
+         </md-card>
+      </div>
+      <div class="md-layout-item"></div>
+   </div>
 </template>
+
 
 <script>
 import { ChaveAcessoHelper } from './classes/ChaveAcessoHelper';
@@ -42,6 +87,9 @@ export default {
     methods: {
     addItem() {
       this.nfe = new ChaveAcessoHelper(this.text);
+    },
+    clear() {
+      this.nfe = "";
     }
   }
 }
