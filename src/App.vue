@@ -2,12 +2,15 @@
    <div class="md-layout">
       <div class="md-layout-item"></div>
       <div class="md-layout-item">
-         <md-card>
+        </br>
+        </br>
+        </br>
+         <md-card  md-align="center">
             <div id="app">
                <md-card-header >
-                  <md-field>
+                  <md-field md-clearable>
                      <label>Chave de Acesso</label>
-                     <md-input v-model="text" @input="addItem" @change="addItem"  maxlength="44" size="44"></md-input>
+                     <md-input type="number" v-model="text" @input="addItem" @change="addItem"  maxlength="44" size="44"></md-input>
                   </md-field>
                </md-card-header>
                <md-card-content>
@@ -89,6 +92,7 @@ export default {
       this.nfe = new ChaveAcessoHelper(this.text);
     },
     clear() {
+      this.text = "";
       this.nfe = "";
     }
   }
