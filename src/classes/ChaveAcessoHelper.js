@@ -14,3 +14,54 @@ export class ChaveAcessoHelper {
     }
 
 }
+
+export class ConveterUtil {
+
+    static getUFDesc(codigoUF) {
+        let estados = [
+            {codigo: "12", descricao: "ACRE" }, 
+            {codigo: "27", descricao: "ALAGOAS"},
+            {codigo: "13", descricao: "AMAZONAS"},
+            {codigo: "16", descricao: "AMAPÁ"},
+            {codigo: "23", descricao: "BAHIA"},
+            {codigo: "29", descricao: "CEARÁ"},
+            {codigo: "53", descricao: "DISTRITO FEDERAL"},
+            {codigo: "32", descricao: "ESPIRITO SANTO"},
+            {codigo: "52", descricao: "GOIÁS"},
+            {codigo: "21", descricao: "MARANHÃO"},
+            {codigo: "31", descricao: "MINAS GERAIS"},
+            {codigo: "50", descricao: "MATO GROSSO DO SUL"},
+            {codigo: "51", descricao: "MATO GROSSO"},
+            {codigo: "15", descricao: "PARÁ"},
+            {codigo: "25", descricao: "PARAÍBA"},
+            {codigo: "26", descricao: "PERNAMBUCO"},
+            {codigo: "22", descricao: "PIAUÍ"},
+            {codigo: "41", descricao: "PARANÁ"},
+            {codigo: "33", descricao: "RIO DE JANEIRO"},
+            {codigo: "24", descricao: "RIO GRANDE DO NORTE"},
+            {codigo: "11", descricao: "RONDÔNIA"},
+            {codigo: "14", descricao: "RORAIMA"},
+            {codigo: "43", descricao: "RIO GRANDE DO SUL"},
+            {codigo: "42", descricao: "SANTA CATARINA"},
+            {codigo: "28", descricao: "SERGIPE"},
+            {codigo: "35", descricao: "SÃO PAULO"},
+            {codigo: "17", descricao: "TOCANTINS"}
+        ];
+        let filtered = estados.filter(uf => codigoUF === uf.codigo);
+        return `${codigoUF} (${filtered[0].descricao})`;
+    }
+
+    static getTpEmisDesc(tpEmis) {
+        let tpEmisList = [
+            {codigo: "1", descricao: "Normal" }, 
+            {codigo: "2", descricao: "Form Seg"},
+            {codigo: "3", descricao: "SCAN"},
+            {codigo: "4", descricao: "EPEC"},
+            {codigo: "5", descricao: "FSDA"},
+            {codigo: "6", descricao: "SVCAN"},
+            {codigo: "7", descricao: "SVCRS"}
+        ];
+        let filtered = tpEmisList.filter(tipo => tpEmis === tipo.codigo);
+        return `${tpEmis} (${filtered[0].descricao})`;
+    }
+}

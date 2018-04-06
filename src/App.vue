@@ -21,7 +21,7 @@
                      </md-table-row>
                      <md-table-row>
                         <md-table-cell>UF/Estado</md-table-cell>
-                        <md-table-cell>{{ nfe.uf }}</md-table-cell>
+                        <md-table-cell>{{ getUFDesc(nfe.uf) }}</md-table-cell>
                      </md-table-row>
                      <md-table-row>
                         <md-table-cell>CNPJ</md-table-cell>
@@ -41,7 +41,7 @@
                      </md-table-row>
                      <md-table-row>
                         <md-table-cell>Tipo Emissao</md-table-cell>
-                        <md-table-cell>{{ nfe.tipoEmissao }}</md-table-cell>
+                        <md-table-cell>{{ getTpEmisDesc(nfe.tipoEmissao) }}</md-table-cell>
                      </md-table-row>
                      <md-table-row>
                         <md-table-cell>Codigo Numerico</md-table-cell>
@@ -65,7 +65,7 @@
 
 
 <script>
-import { ChaveAcessoHelper } from './classes/ChaveAcessoHelper';
+import { ChaveAcessoHelper, ConveterUtil } from './classes/ChaveAcessoHelper';
 export default {
   name: 'app',
   data () {
@@ -94,6 +94,14 @@ export default {
     clear() {
       this.text = "";
       this.nfe = "";
+    },
+    getUFDesc(uf) {
+      if(uf)
+        return ConveterUtil.getUFDesc(uf);
+    },
+    getTpEmisDesc(tpEmis) {
+      if(tpEmis)
+        return ConveterUtil.getTpEmisDesc(tpEmis);
     }
   }
 }
