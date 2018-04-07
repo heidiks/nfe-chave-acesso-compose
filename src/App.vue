@@ -40,15 +40,16 @@
                         <md-table-cell>{{ nfe.numero }}</md-table-cell>
                      </md-table-row>
                      <md-table-row>
-                        <md-table-cell>Tipo Emissao</md-table-cell>
+                        <md-tooltip md-direction="top">{{ this.getTpEmisListDesc() }}</md-tooltip>
+                        <md-table-cell>Tipo Emissão</md-table-cell>
                         <md-table-cell>{{ getTpEmisDesc(nfe.tipoEmissao) }}</md-table-cell>
                      </md-table-row>
                      <md-table-row>
-                        <md-table-cell>Codigo Numerico</md-table-cell>
+                        <md-table-cell>Código Numérico</md-table-cell>
                         <md-table-cell>{{ nfe.codigoNumerico }}</md-table-cell>
                      </md-table-row>
                      <md-table-row>
-                        <md-table-cell>Digito Verificador</md-table-cell>
+                        <md-table-cell>Dígito Verificador</md-table-cell>
                         <md-table-cell>{{ nfe.digitoVerificador }}</md-table-cell>
                      </md-table-row>
                   </md-table>
@@ -102,6 +103,9 @@ export default {
     getTpEmisDesc(tpEmis) {
       if(tpEmis)
         return ConveterUtil.getTpEmisDesc(tpEmis);
+    },
+    getTpEmisListDesc() {
+      return ConveterUtil.getTpEmisListDesc();
     }
   }
 }

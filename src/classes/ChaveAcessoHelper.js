@@ -51,8 +51,8 @@ export class ConveterUtil {
         return `${codigoUF} (${filtered[0].descricao})`;
     }
 
-    static getTpEmisDesc(tpEmis) {
-        let tpEmisList = [
+    static getTpEmisList() {
+        return [
             {codigo: "1", descricao: "Normal" }, 
             {codigo: "2", descricao: "Form Seg"},
             {codigo: "3", descricao: "SCAN"},
@@ -61,7 +61,19 @@ export class ConveterUtil {
             {codigo: "6", descricao: "SVCAN"},
             {codigo: "7", descricao: "SVCRS"}
         ];
+    }
+
+    static getTpEmisDesc(tpEmis) {
+        let tpEmisList = this.getTpEmisList();
         let filtered = tpEmisList.filter(tipo => tpEmis === tipo.codigo);
         return `${tpEmis} (${filtered[0].descricao})`;
+    }
+
+
+    static getTpEmisListDesc() {
+        let result = "";
+        let tpEmisList = this.getTpEmisList();
+        tpEmisList.forEach(tpEmis => result += `${tpEmis.codigo} = ${tpEmis.descricao} / `);
+        return result;
     }
 }
