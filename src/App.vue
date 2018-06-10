@@ -24,6 +24,14 @@
                         <md-table-cell>{{ getUFDesc(nfe.uf) }}</md-table-cell>
                      </md-table-row>
                      <md-table-row>
+                        <md-table-cell>Ano</md-table-cell>
+                        <md-table-cell>{{ nfe.ano }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
+                        <md-table-cell>Mês</md-table-cell>
+                        <md-table-cell>{{ nfe.mes }}</md-table-cell>
+                     </md-table-row>
+                     <md-table-row>
                         <md-table-cell>CNPJ</md-table-cell>
                         <md-table-cell>{{ nfe.cnpj }}</md-table-cell>
                      </md-table-row>
