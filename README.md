@@ -1,7 +1,5 @@
 # Chave Acesso composer
-It's a simple compose for chave acesso of Nota Fiscal Eletrônica
-
-> A Vue.js project
+Extrai informações da chave de acesso de Notas Fiscais eletronica
 
 ## Build Setup
 
