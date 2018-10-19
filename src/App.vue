@@ -69,7 +69,7 @@
             </div>
             <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active.sync="showSnackbar" md-persistent>
               <span>{{ dvMessage }}</span>
-              <md-button class="md-primary" @click="applyNewDv">Aplicar</md-button>
+              <md-button class="md-primary" @click="applyNewDv">{{snackButton}}</md-button>
             </md-snackbar>
          </md-card>
       </div>
@@ -86,6 +86,7 @@ export default {
     return {
       dvMessage: '',
       showSnackbar: false,
+      snackButton: 'Fechar',
       position: 'center',
       duration: 8000,
       isInfinity: false,
@@ -120,6 +121,11 @@ export default {
       if(digitoCalculado.toString() != this.nfe.digitoVerificador) {
         this.dvMessage = "Dígito verificador inválido, o correto seria " + digitoCalculado.toString();
         this.showSnackbar = true;
+        this.snackButton = "Aplicar"
+      } else {
+        this.dvMessage = "Dígito verificador válido!";
+        this.showSnackbar = true;
+        this.snackButton = "Fechar"
       }
     },
     applyNewDv() {
