@@ -1,5 +1,5 @@
 # Chave Acesso composer
-Extrai informações da chave de acesso de Notas Fiscais eletrônicas - [Sefaz ](http://www.nfe.fazenda.gov.br)
+Extrai informações da chave de acesso de Nota Fiscal eletrônica(NFe) e Conhecimento de Transporte eletrônico(CTe) - [Sefaz](http://www.nfe.fazenda.gov.br)
 
 ## Build Setup
 
