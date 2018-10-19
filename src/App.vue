@@ -63,9 +63,14 @@
                   </md-table>
                </md-card-content>
                <md-card-actions>
+                  <md-button class="md-raised md-accent" :disabled="this.text.length < 44" @click="validate">Validar dígito verificador</md-button>
                   <md-button class="md-raised md-primary" @click="clear">Limpar</md-button>
                </md-card-actions>
             </div>
+            <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active.sync="showSnackbar" md-persistent>
+              <span>{{ dvMessage }}</span>
+              <md-button class="md-primary" @click="applyNewDv">Aplicar</md-button>
+            </md-snackbar>
          </md-card>
       </div>
       <div class="md-layout-item"></div>
@@ -79,8 +84,13 @@ export default {
   name: 'app',
   data () {
     return {
+      dvMessage: '',
+      showSnackbar: false,
+      position: 'center',
+      duration: 8000,
+      isInfinity: false,
       text: '',
-      list: [{text: 'Welcome to Your Vue.js App'}],
+      list: [{text: 'NFe/CTe chave acesso compose'}],
       nfe: {
         chNFe: '',
         uf: '',
@@ -103,6 +113,20 @@ export default {
     clear() {
       this.text = "";
       this.nfe = "";
+    },
+    validate() {
+      let digitoCalculado = ChaveAcessoHelper.calculaDv(this.text);
+
+      if(digitoCalculado.toString() != this.nfe.digitoVerificador) {
+        this.dvMessage = "Dígito verificador inválido, o correto seria " + digitoCalculado.toString();
+        this.showSnackbar = true;
+      }
+    },
+    applyNewDv() {
+      let digitoTemp = ChaveAcessoHelper.calculaDv(this.text);
+      this.nfe.digitoVerificador = digitoTemp;
+      this.text = this.nfe.toString();
+      this.showSnackbar = false;
     },
     getUFDesc(uf) {
       if(uf)

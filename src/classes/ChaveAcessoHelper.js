@@ -13,6 +13,29 @@ export class ChaveAcessoHelper {
         this.digitoVerificador= chNFe.substring(43, 44)
     }
 
+    static calculaDv(chaveAcesso) {
+      let charArray = chaveAcesso;
+      let multiplicadores = new Array(2,3,4,5,6,7,8,9);
+      let i = 42;
+      let soma = 0;
+      while (i >= 0) {
+        for (let m=0; m < multiplicadores.length && i>=0; m++) {
+          soma+= charArray[i] * multiplicadores[m];
+          i--;
+        }
+      }
+      let resto = soma % 11;
+      if (resto == '0' || resto == '1') {
+        return 0;
+      } else {
+        return (11 - resto);
+      }
+    }
+
+    toString() {
+      return this.uf + this.ano + this.mes + this.cnpj + this.modelo + this.serie + this.numero + this.tipoEmissao + this.codigoNumerico + this.digitoVerificador;
+    }
+
 }
 
 export class ConveterUtil {
