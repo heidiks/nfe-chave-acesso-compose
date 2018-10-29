@@ -12,7 +12,7 @@
                      <label>Chave de Acesso</label>
                      <md-input type="number" v-model="text" @input="addItem" @change="addItem"  maxlength="44" size="44"></md-input>
                   </md-field>
-                  <div class="md-subhead" v-show="nfe.modelo && nfe.modelo.length == 2">
+                  <div v-show="nfe.modelo && nfe.modelo.length == 2">
                       <md-chip class="md-primary">{{ getModeloDocumento(nfe.modelo) }}</md-chip>
                   </div>
                </md-card-header>
