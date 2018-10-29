@@ -99,4 +99,13 @@ export class ConveterUtil {
         tpEmisList.forEach(tpEmis => result += `${tpEmis.codigo} = ${tpEmis.descricao} / `);
         return result;
     }
+
+    static getModeloDocumento(modelo) {
+        if(modelo == '55')
+          return 'NF-e';
+        else if(modelo == '57')
+          return 'CT-e'
+
+      return "Modelo desconhecido";
+    }
 }
