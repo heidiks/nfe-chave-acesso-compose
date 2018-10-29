@@ -101,11 +101,16 @@ export class ConveterUtil {
     }
 
     static getModeloDocumento(modelo) {
-        if(modelo == '55')
-          return 'NF-e';
-        else if(modelo == '57')
+      switch (modelo) {
+        case '55':
+          return 'NF-e'
+        case '57':
           return 'CT-e'
+        case '65':
+          return 'NFC-e'
+        default:
+          return 'Modelo desconhecido'
 
-      return "Modelo desconhecido";
+      }
     }
 }

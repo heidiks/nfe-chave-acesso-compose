@@ -110,7 +110,7 @@ export default {
       }
     }
   },
-    methods: {
+  methods: {
     addItem() {
       this.nfe = new ChaveAcessoHelper(this.text);
     },
