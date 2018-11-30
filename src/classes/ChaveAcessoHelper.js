@@ -89,6 +89,7 @@ export class ConveterUtil {
     static getTpEmisDesc(tpEmis) {
         let tpEmisList = this.getTpEmisList();
         let filtered = tpEmisList.filter(tipo => tpEmis === tipo.codigo);
+        if(filtered == null) { return "TP [" + tpEmis + "] desconhecido"; }
         return `${tpEmis} (${filtered[0].descricao})`;
     }
 
