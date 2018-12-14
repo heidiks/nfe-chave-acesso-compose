@@ -71,6 +71,8 @@ export class ConveterUtil {
             {codigo: "17", descricao: "TOCANTINS"}
         ];
         let filtered = estados.filter(uf => codigoUF === uf.codigo);
+        if(filtered.length == 0)
+          return `${codigoUF} (UF Desconhecido)`
         return `${codigoUF} (${filtered[0].descricao})`;
     }
 
@@ -89,7 +91,9 @@ export class ConveterUtil {
     static getTpEmisDesc(tpEmis) {
         let tpEmisList = this.getTpEmisList();
         let filtered = tpEmisList.filter(tipo => tpEmis === tipo.codigo);
-        if(filtered == null || !filtered ) { return "TP [" + tpEmis + "] desconhecido"; }
+        if(filtered.length == 0 ) {
+          return `TpEmis [${tpEmis}] desconhecido`;
+        }
         return `${tpEmis} (${filtered[0].descricao})`;
     }
 
