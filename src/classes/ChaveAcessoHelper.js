@@ -72,7 +72,7 @@ export class ConveterUtil {
         ];
         let filtered = estados.filter(uf => codigoUF === uf.codigo);
         if(filtered.length == 0)
-          return `${codigoUF} (UF Desconhecido)`
+          return `${codigoUF} (UF Desconhecida)`
         return `${codigoUF} (${filtered[0].descricao})`;
     }
 
@@ -92,7 +92,7 @@ export class ConveterUtil {
         let tpEmisList = this.getTpEmisList();
         let filtered = tpEmisList.filter(tipo => tpEmis === tipo.codigo);
         if(filtered.length == 0 ) {
-          return `TpEmis [${tpEmis}] desconhecido`;
+          return `${tpEmis} (DESCONHECIDO)`;
         }
         return `${tpEmis} (${filtered[0].descricao})`;
     }
