@@ -1,5 +1,10 @@
 # Chave Acesso composer
-Extrai informações da chave de acesso de Nota Fiscal eletrônica(NFe) e Conhecimento de Transporte eletrônico(CTe) - [Sefaz](http://www.nfe.fazenda.gov.br)
+Extrai informações da chave de acesso:
+  * Nota Fiscal eletrônica(NF-e) 
+  * Nota Fiscal do Consumidor eletrônica(NFC-e) 
+  * Conhecimento de Transporte eletrônico(CT-e)
+  
+[Sefaz](http://www.nfe.fazenda.gov.br)
 
 http://heidiks.github.io/projects/nfe/
 
