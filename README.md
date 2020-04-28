@@ -1,4 +1,4 @@
-![Build](https://github.com/heidiks/nfe-chave-acesso-compose/workflows/Build/badge.svg)svg)
+![Build](https://github.com/heidiks/nfe-chave-acesso-compose/workflows/Build/badge.svg)
 
 # Chave Acesso composer
 Parse das informações da chave de acesso:
