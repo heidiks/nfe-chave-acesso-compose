@@ -1,4 +1,4 @@
-![Node.js CI](https://github.com/heidiks/nfe-chave-acesso-compose/workflows/Node.js%20CI/badge.svg)
+![Build](https://github.com/heidiks/nfe-chave-acesso-compose/workflows/Node.js%20CI/badge.svg)
 
 # Chave Acesso composer
 Parse das informações da chave de acesso:
