@@ -1,5 +1,7 @@
+![Node.js CI](https://github.com/heidiks/nfe-chave-acesso-compose/workflows/Node.js%20CI/badge.svg)
+
 # Chave Acesso composer
-Extrai informações da chave de acesso:
+Parse das informações da chave de acesso:
   * Nota Fiscal eletrônica(NF-e) 
   * Nota Fiscal do Consumidor eletrônica(NFC-e) 
   * Conhecimento de Transporte eletrônico(CT-e)
