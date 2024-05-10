@@ -41,7 +41,7 @@ jobs:
      - name: Build
        run: npm run build
      - name: Move deploy files
-       run: mkdir -p deploy/dist;mv dist/ deploy/dist/;cp index.html deploy/index.html
+       run: mkdir -p deploy/dist;mv dist/ deploy/;cp index.html deploy/index.html
      - name: Setup Pages
        uses: actions/configure-pages@v4
      - name: Upload dist
