@@ -7,6 +7,10 @@
         </br>
          <md-card  md-align="center">
             <div id="app">
+              <md-button class="md-icon-button" @click="toggleTheme">
+                <md-icon v-if="isDarkTheme">brightness_7</md-icon>
+                <md-icon v-else>brightness_3</md-icon>
+              </md-button>
                <md-card-header >
                   <md-field md-clearable>
                      <label>Chave de Acesso</label>
@@ -128,12 +132,22 @@ export default {
         digitoVerificador: ''
       },
       showAlert: true,
-      url: 'https://heidiks.github.io/nfe-chave-acesso-compose'
+      url: 'https://heidiks.github.io/nfe-chave-acesso-compose',
+      isDarkTheme: false
     }
   },
 
   mounted() {
     this.history = this.loadHistory();
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark') {
+      this.isDarkTheme = true;
+      document.body.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+    } else {
+      document.body.classList.add('light-theme');
+      document.body.classList.remove('dark-theme');
+    }
   },
 
   methods: {
@@ -180,6 +194,13 @@ export default {
     clear() {
       this.text = "";
       this.nfe = "";
+    },
+
+    toggleTheme() {
+      this.isDarkTheme = !this.isDarkTheme;
+      document.body.classList.toggle('dark-theme', this.isDarkTheme);
+      document.body.classList.toggle('light-theme', !this.isDarkTheme);
+      localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
     },
 
     validate() {
