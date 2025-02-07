@@ -89,11 +89,10 @@
           </md-list>
         </div>
 
-
-
-
-
       </div>
+     <div v-if="showAlert" style="position: fixed; bottom: 0; width: 100%; background-color: #ff9800; color: white; padding: 10px; text-align: center;">
+       Em breve acesso apenas via: <a :href="url" target="_blank" style="color: white;">{{ url }}</a>
+     </div>
       <div class="md-layout-item"></div>
    </div>
 </template>
@@ -127,7 +126,9 @@ export default {
         tipoEmissao: '',
         codigoNumerico: '',
         digitoVerificador: ''
-      }
+      },
+      showAlert: true,
+      url: 'https://heidiks.github.io/nfe-chave-acesso-compose'
     }
   },
 
