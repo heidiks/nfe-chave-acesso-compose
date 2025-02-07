@@ -75,6 +75,24 @@
               <md-button class="md-primary" @click="applyNewDv">{{snackButton}}</md-button>
             </md-snackbar>
          </md-card>
+        <div v-if="history.length > 0">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <md-subheader style="font-weight: bold; color: blue;">Última{{ history.length > 1 ? 's' : '' }} {{history.length}} Chave{{ history.length > 1 ? 's' : '' }} Acessada{{ history.length > 1 ? 's' : '' }}</md-subheader>
+            <md-button class="md-icon-button" @click="clearHistory">
+              <md-icon>delete</md-icon>
+            </md-button>
+          </div>
+          <md-list>
+            <md-list-item v-for="(item, index) in history" :key="index" @click="loadFromHistory(item)" style="font-weight: bold; color: blue;">
+              <md-icon>history</md-icon>{{ item.chNFe }}
+            </md-list-item>
+          </md-list>
+        </div>
+
+
+
+
+
       </div>
       <div class="md-layout-item"></div>
    </div>
@@ -82,7 +100,8 @@
 
 
 <script>
-import { ChaveAcessoHelper, ConveterUtil } from './classes/ChaveAcessoHelper';
+import {ChaveAcessoHelper, ConveterUtil} from './classes/ChaveAcessoHelper';
+
 export default {
   name: 'app',
   data () {
@@ -95,6 +114,7 @@ export default {
       isInfinity: false,
       text: '',
       list: [{text: 'NFe/CTe chave acesso compose'}],
+      history: [],
       nfe: {
         chNFe: '',
         uf: '',
@@ -110,18 +130,61 @@ export default {
       }
     }
   },
+
+  mounted() {
+    this.history = this.loadHistory();
+  },
+
   methods: {
+    saveToHistory() {
+      if (!this.text || this.text.length !== 44) {
+        return;
+      }
+      const history = JSON.parse(localStorage.getItem('nfeHistory')) || [];
+      const currentNfe = this.nfe;
+      const existingIndex = history.findIndex(item => item.chNFe === currentNfe.chNFe);
+
+      if (existingIndex !== -1) {
+        history.splice(existingIndex, 1);
+      }
+
+      history.unshift(currentNfe);
+      if (history.length > 5) {
+        history.pop();
+      }
+
+      localStorage.setItem('nfeHistory', JSON.stringify(history));
+      this.history = this.loadHistory();
+    },
+
+    loadFromHistory(item) {
+      this.nfe = item;
+      this.text = item.chNFe;
+    },
+
+    loadHistory() {
+      return JSON.parse(localStorage.getItem('nfeHistory')) || [];
+    },
+
+    clearHistory() {
+      localStorage.removeItem('nfeHistory');
+      this.history = [];
+    },
+
     addItem() {
       this.nfe = new ChaveAcessoHelper(this.text);
+      this.saveToHistory();
     },
+
     clear() {
       this.text = "";
       this.nfe = "";
     },
+
     validate() {
       let digitoCalculado = ChaveAcessoHelper.calculaDv(this.text);
 
-      if(digitoCalculado.toString() != this.nfe.digitoVerificador) {
+      if(digitoCalculado.toString() !== this.nfe.digitoVerificador) {
         this.dvMessage = "Dígito verificador inválido, o correto seria " + digitoCalculado.toString();
         this.showSnackbar = true;
         this.snackButton = "Aplicar"
@@ -131,23 +194,27 @@ export default {
         this.snackButton = "Fechar"
       }
     },
+
     applyNewDv() {
-      let digitoTemp = ChaveAcessoHelper.calculaDv(this.text);
-      this.nfe.digitoVerificador = digitoTemp;
+      this.nfe.digitoVerificador = ChaveAcessoHelper.calculaDv(this.text);
       this.text = this.nfe.toString();
       this.showSnackbar = false;
     },
+
     getUFDesc(uf) {
       if(uf)
         return ConveterUtil.getUFDesc(uf);
     },
+
     getTpEmisDesc(tpEmis) {
       if(tpEmis)
         return ConveterUtil.getTpEmisDesc(tpEmis);
     },
+
     getTpEmisListDesc() {
       return ConveterUtil.getTpEmisListDesc();
     },
+
     getModeloDocumento(modelo) {
       return ConveterUtil.getModeloDocumento(modelo);
     }
