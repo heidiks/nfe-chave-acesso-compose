@@ -81,7 +81,7 @@
          </md-card>
         <div v-if="history.length > 0">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <md-subheader style="font-weight: bold; color: blue;">Última{{ history.length > 1 ? 's' : '' }} {{history.length}} Chave{{ history.length > 1 ? 's' : '' }} Acessada{{ history.length > 1 ? 's' : '' }}</md-subheader>
+            <md-subheader style="font-weight: bold; color: darkgray;">Última{{ history.length > 1 ? 's' : '' }} {{history.length > 1 ? history.length : ''}} Chave{{ history.length > 1 ? 's' : '' }} Acessada{{ history.length > 1 ? 's' : '' }}</md-subheader>
             <md-button class="md-icon-button" @click="clearHistory">
               <md-icon>delete</md-icon>
             </md-button>

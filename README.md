@@ -2,13 +2,11 @@
 
 # Chave Acesso composer
 Parse das informações da chave de acesso:
-  * Nota Fiscal eletrônica(NF-e) 
-  * Nota Fiscal do Consumidor eletrônica(NFC-e) 
+  * Nota Fiscal eletrônica(NF-e)
+  * Nota Fiscal do Consumidor eletrônica(NFC-e)
   * Conhecimento de Transporte eletrônico(CT-e)
-  
-[Sefaz](http://www.nfe.fazenda.gov.br)
 
-http://heidiks.github.io/projects/nfe/
+[Sefaz](http://www.nfe.fazenda.gov.br)
 
 ## Build Setup
 
