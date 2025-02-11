@@ -1,8 +1,8 @@
 {
-  "name": "my-working-journey",
-  "description": "A Vue.js project",
+  "name": "chave acesso compose",
+  "description": "chave acesso compose",
   "version": "1.0.0",
-  "author": "heidiks <heidiks@gmail.com>",
+  "author": "heidiks",
   "license": "MIT",
   "private": true,
   "scripts": {
