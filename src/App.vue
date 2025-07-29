@@ -131,7 +131,7 @@ export default {
         codigoNumerico: '',
         digitoVerificador: ''
       },
-      showAlert: true,
+      showAlert: false,
       url: 'https://heidiks.github.io/nfe-chave-acesso-compose',
       isDarkTheme: false
     }
