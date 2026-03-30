@@ -270,6 +270,7 @@ html, body {
   border-radius: 8px;
   line-height: 1.8;
   word-break: break-all;
+  cursor: pointer;
 }
 
 .chave-display span.highlight {
@@ -307,6 +308,7 @@ html, body {
 .badge {
   display: inline-flex;
   align-items: center;
+  gap: 4px;
   padding: 3px 10px;
   font-size: 12px;
   font-weight: 600;

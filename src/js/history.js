@@ -1,3 +1,5 @@
+import { getModeloDescricao } from './chave-acesso.js';
+
 const STORAGE_KEY = 'nfeHistory';
 const MAX_ITEMS = 10;
 
@@ -40,7 +42,9 @@ export function filterHistory(query) {
   if (!query) return items;
   const q = query.toLowerCase();
   return items.filter(item =>
-    item.chave.includes(q) || (item.modelo || '').toLowerCase().includes(q)
+    item.chave.includes(q) ||
+    (item.modelo || '').toLowerCase().includes(q) ||
+    getModeloDescricao(item.modelo).toLowerCase().includes(q)
   );
 }
 

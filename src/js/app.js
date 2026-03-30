@@ -3,6 +3,10 @@ import { initTheme, toggleTheme } from './theme.js';
 import { getHistory, addToHistory, clearHistory as clearAllHistory, filterHistory, formatRelativeTime } from './history.js';
 import { icon } from './icons.js';
 
+function escapeAttr(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 const SEG_COLORS = {
   uf: 'var(--seg-uf)', ano: 'var(--seg-ano)', mes: 'var(--seg-mes)',
   cnpj: 'var(--seg-cnpj)', modelo: 'var(--seg-modelo)', serie: 'var(--seg-serie)',
@@ -11,7 +15,8 @@ const SEG_COLORS = {
 };
 
 // --- State ---
-let tabs = [{ id: Date.now(), chave: '', parsed: null, validation: null }];
+let nextTabId = 1;
+let tabs = [{ id: nextTabId++, chave: '', parsed: null, validation: null }];
 let activeTabId = tabs[0].id;
 let currentTheme = 'dark';
 let historyOpen = false;
@@ -52,8 +57,8 @@ function renderTabBar() {
     let label = 'Nova aba';
     if (t.parsed) {
       const modelo = getModeloDescricao(t.parsed.modelo);
-      const suffix = t.chave.slice(-4);
-      label = `<span class="tab-model">${modelo}</span> <span class="tab-suffix">...${suffix}</span>`;
+      const suffix = t.chave.length >= 8 ? `...${t.chave.slice(-8)}` : '';
+      label = `<span class="tab-model">${modelo}</span> <span class="tab-suffix">${suffix}</span>`;
     }
     return `
       <button class="tab ${isActive ? 'active' : ''}" data-tab-id="${t.id}">
@@ -96,7 +101,7 @@ function renderInput(tab) {
           class="chave-input"
           data-action="input-chave"
           placeholder="Cole ou digite a chave de acesso (44 digitos)"
-          value="${tab.chave}"
+          value="${escapeAttr(tab.chave)}"
           maxlength="44"
           inputmode="numeric"
         >
@@ -150,7 +155,7 @@ function renderFields(tab) {
     const color = SEG_COLORS[f.key] || 'var(--text-primary)';
     const extraStyle = f.key === 'digitoVerificador' ? 'color: var(--seg-digito)' : `color: ${color}`;
     return `
-      <div class="field-card" data-field-key="${f.key}" data-copy-value="${f.copyValue}">
+      <div class="field-card" data-field-key="${escapeAttr(f.key)}" data-copy-value="${escapeAttr(f.copyValue)}">
         <span class="field-label">${f.label}</span>
         <span class="field-value" style="${extraStyle}">${f.value}</span>
         <button class="field-copy" title="Copiar">${icon('clipboard', 14)}</button>
@@ -183,7 +188,7 @@ function renderHistory() {
           class="history-search"
           data-action="filter-history"
           placeholder="Filtrar chaves..."
-          value="${historyFilter}"
+          value="${escapeAttr(historyFilter)}"
         >
       </div>`;
 
@@ -192,7 +197,7 @@ function renderHistory() {
           const badgeClass = getModelBadgeClass(item.modelo || '');
           const modelLabel = item.modelo ? getModeloDescricao(item.modelo) : '';
           return `
-            <div class="history-item" data-history-chave="${item.chave}">
+            <div class="history-item" data-history-chave="${escapeAttr(item.chave)}">
               <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
                 ${modelLabel ? `<span class="badge ${badgeClass}" style="flex-shrink: 0;">${modelLabel}</span>` : ''}
                 <span class="history-chave">${item.chave}</span>
@@ -278,7 +283,7 @@ function bindEvents() {
   const newTabBtn = app.querySelector('[data-action="new-tab"]');
   if (newTabBtn) {
     newTabBtn.addEventListener('click', () => {
-      const newTab = { id: Date.now(), chave: '', parsed: null, validation: null };
+      const newTab = { id: nextTabId++, chave: '', parsed: null, validation: null };
       tabs.push(newTab);
       activeTabId = newTab.id;
       render();
@@ -335,13 +340,13 @@ function bindEvents() {
   app.querySelectorAll('.field-card[data-field-key]').forEach(card => {
     const key = card.dataset.fieldKey;
     card.addEventListener('mouseenter', () => {
-      app.querySelectorAll('.chave-display span[data-seg]').forEach(span => {
-        if (span.dataset.seg === key) {
-          span.classList.add('highlight');
-          span.classList.remove('dimmed');
+      app.querySelectorAll('.chave-display span[data-seg]').forEach(seg => {
+        if (seg.dataset.seg === key || (key === 'ano' && seg.dataset.seg === 'mes')) {
+          seg.classList.add('highlight');
+          seg.classList.remove('dimmed');
         } else {
-          span.classList.add('dimmed');
-          span.classList.remove('highlight');
+          seg.classList.add('dimmed');
+          seg.classList.remove('highlight');
         }
       });
     });
@@ -454,7 +459,7 @@ function bindEvents() {
       const chave = el.dataset.historyChave;
       const parsed = parseChave(chave);
       const validation = parsed ? validarDigito(chave) : null;
-      const newTab = { id: Date.now(), chave, parsed, validation };
+      const newTab = { id: nextTabId++, chave, parsed, validation };
       tabs.push(newTab);
       activeTabId = newTab.id;
       updateURL();
@@ -502,7 +507,7 @@ function loadFromURL() {
     const parsed = parseChave(chave);
     const validation = parsed ? validarDigito(chave) : null;
     if (parsed) addToHistory({ chave, modelo: parsed.modelo });
-    return { id: Date.now() + i, chave, parsed, validation };
+    return { id: nextTabId++, chave, parsed, validation };
   });
   activeTabId = tabs[0].id;
 }
