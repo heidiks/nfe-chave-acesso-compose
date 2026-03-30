@@ -28,10 +28,12 @@ function activeTab() {
 }
 
 function getModelBadgeClass(modelo) {
-  if (modelo === '55') return 'badge-nfe';
-  if (modelo === '57') return 'badge-cte';
-  if (modelo === '65') return 'badge-nfce';
-  return '';
+  const map = {
+    '55': 'badge-nfe', '57': 'badge-cte', '58': 'badge-mdfe',
+    '59': 'badge-cfe', '63': 'badge-bpe', '65': 'badge-nfce',
+    '66': 'badge-nf3e', '67': 'badge-cte',
+  };
+  return map[modelo] || '';
 }
 
 function updateURL() {

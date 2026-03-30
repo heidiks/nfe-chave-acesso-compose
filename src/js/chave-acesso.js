@@ -16,7 +16,9 @@ const TIPOS_EMISSAO = {
 };
 
 const MODELOS = {
-  '55': 'NF-e', '57': 'CT-e', '65': 'NFC-e',
+  '55': 'NF-e', '57': 'CT-e', '58': 'MDF-e',
+  '59': 'CF-e SAT', '63': 'BP-e', '65': 'NFC-e',
+  '66': 'NF3e', '67': 'CT-e OS',
 };
 
 // Segment definitions: [start, end, key, label]

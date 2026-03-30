@@ -361,6 +361,11 @@ html, body {
   color: var(--badge-nfce-text);
 }
 
+.badge-mdfe { background-color: #b45309; color: #fef3c7; }
+.badge-cfe { background-color: #0f766e; color: #ccfbf1; }
+.badge-bpe { background-color: #be185d; color: #fce7f3; }
+.badge-nf3e { background-color: #4338ca; color: #e0e7ff; }
+
 .badge-valid {
   background-color: var(--badge-valid-bg);
   color: var(--badge-valid-text);
