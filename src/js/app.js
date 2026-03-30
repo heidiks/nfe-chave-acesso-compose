@@ -125,9 +125,9 @@ function renderBadges(tab) {
   let validationBadge = '';
   if (v) {
     if (v.valido) {
-      validationBadge = `<span class="badge badge-valid">${icon('check', 12)} Digito Valido</span>`;
+      validationBadge = `<span class="badge badge-valid">${icon('check', 12)} Dígito Válido</span>`;
     } else {
-      validationBadge = `<span class="badge badge-invalid">${icon('x', 12)} Digito Invalido (esperado: ${v.calculado})</span>`;
+      validationBadge = `<span class="badge badge-invalid">${icon('x', 12)} Dígito Inválido (esperado: ${v.calculado})</span>`;
     }
   }
 
@@ -144,14 +144,14 @@ function renderFields(tab) {
 
   const fields = [
     { key: 'uf', label: 'UF/Estado', value: `${p.uf} — ${getUfDescricao(p.uf)}`, copyValue: p.uf },
-    { key: 'ano', label: 'Ano/Mes', value: `${p.mes}/${p.ano}`, copyValue: `${p.mes}/${p.ano}` },
+    { key: 'ano', label: 'Ano/Mês', value: `20${p.ano}/${p.mes}`, copyValue: `20${p.ano}/${p.mes}` },
     { key: 'cnpj', label: 'CNPJ', value: formatarCnpj(p.cnpj), copyValue: p.cnpj },
     { key: 'modelo', label: 'Modelo', value: `${p.modelo} — ${getModeloDescricao(p.modelo)}`, copyValue: p.modelo },
-    { key: 'serie', label: 'Serie', value: p.serie, copyValue: p.serie },
-    { key: 'numero', label: 'Numero', value: p.numero, copyValue: p.numero },
-    { key: 'tipoEmissao', label: 'Tipo Emissao', value: `${p.tipoEmissao} — ${getTipoEmissaoDescricao(p.tipoEmissao)}`, copyValue: p.tipoEmissao },
-    { key: 'codigoNumerico', label: 'Cod. Numerico', value: p.codigoNumerico, copyValue: p.codigoNumerico },
-    { key: 'digitoVerificador', label: 'Digito Verif.', value: p.digitoVerificador, copyValue: p.digitoVerificador },
+    { key: 'serie', label: 'Série', value: p.serie, copyValue: p.serie },
+    { key: 'numero', label: 'Número', value: p.numero, copyValue: p.numero },
+    { key: 'tipoEmissao', label: 'Tipo Emissão', value: `${p.tipoEmissao} — ${getTipoEmissaoDescricao(p.tipoEmissao)}`, copyValue: p.tipoEmissao },
+    { key: 'codigoNumerico', label: 'Cód. Numérico', value: p.codigoNumerico, copyValue: p.codigoNumerico },
+    { key: 'digitoVerificador', label: 'Dígito Verif.', value: p.digitoVerificador, copyValue: p.digitoVerificador },
   ];
 
   const cards = fields.map(f => {
@@ -212,7 +212,7 @@ function renderHistory() {
 
     const footerHtml = items.length
       ? `<div class="history-footer">
-           <button class="btn btn-danger" data-action="clear-history">${icon('trash', 14)} Limpar historico</button>
+           <button class="btn btn-danger" data-action="clear-history">${icon('trash', 14)} Limpar histórico</button>
          </div>`
       : '';
 
@@ -232,7 +232,7 @@ function renderHistory() {
   return `
     <div class="history">
       <div class="history-header" data-action="toggle-history">
-        <span class="history-title">Ultimas ${totalCount} Chaves Acessadas</span>
+        <span class="history-title">Últimas ${totalCount} Chaves Acessadas</span>
         <span class="${chevronClass}">${icon('chevronDown', 16)}</span>
       </div>
       ${bodyContent}
