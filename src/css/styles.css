@@ -618,6 +618,90 @@ html, body {
   background-color: var(--btn-danger-border);
 }
 
+/* ===== Toolbar Buttons & Popover ===== */
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s, background-color 0.15s;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.toolbar-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+#app {
+  position: relative;
+}
+
+.popover {
+  display: none;
+  position: absolute;
+  top: 44px;
+  right: 8px;
+  z-index: 100;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-hover);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  min-width: 220px;
+  max-width: 300px;
+}
+
+.popover.open {
+  display: block;
+}
+
+.popover-header {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.popover-scroll {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.popover-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.popover-table th {
+  text-align: left;
+  padding: 6px 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.popover-table td {
+  padding: 6px 14px;
+  border-top: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.popover-table tr:hover td {
+  background: var(--bg-primary);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .fields-grid {

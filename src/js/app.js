@@ -1,4 +1,4 @@
-import { sanitizeInput, parseChave, validarDigito, getUfDescricao, getTipoEmissaoDescricao, getModeloDescricao, formatarCnpj, SEGMENTS } from './chave-acesso.js';
+import { sanitizeInput, parseChave, validarDigito, getUfDescricao, getTipoEmissaoDescricao, getModeloDescricao, formatarCnpj, SEGMENTS, ESTADOS, MODELOS } from './chave-acesso.js';
 import { initTheme, toggleTheme } from './theme.js';
 import { getHistory, addToHistory, clearHistory as clearAllHistory, filterHistory, formatRelativeTime } from './history.js';
 import { icon } from './icons.js';
@@ -14,6 +14,9 @@ const SEG_COLORS = {
   numero: 'var(--seg-numero)', tipoEmissao: 'var(--seg-tipo-emissao)',
   codigoNumerico: 'var(--seg-codigo-numerico)', digitoVerificador: 'var(--seg-digito)',
 };
+
+// --- Constants ---
+const MAX_TABS = 15;
 
 // --- State ---
 let nextTabId = 1;
@@ -72,12 +75,38 @@ function renderTabBar() {
 
   const themeIcon = currentTheme === 'dark' ? icon('sun', 16) : icon('moon', 16);
 
+  const modelosRows = Object.entries(MODELOS).map(([code, name]) =>
+    `<tr><td>${code}</td><td>${name}</td></tr>`
+  ).join('');
+
+  const estadosRows = Object.entries(ESTADOS)
+    .map(([code, name]) => `<tr><td>${code}</td><td>${name}</td></tr>`)
+    .join('');
+
   return `
     <div class="tab-bar">
       ${tabsHtml}
       <button class="tab-new" data-action="new-tab" title="Nova aba">${icon('plus', 16)}</button>
       <div class="tab-bar-spacer"></div>
-      <button class="theme-toggle" data-action="toggle-theme" title="Alternar tema">${themeIcon}</button>
+      <button class="toolbar-btn" data-popover="modelos" title="Modelos suportados">${icon('info', 18)}</button>
+      <button class="toolbar-btn" data-popover="estados" title="Tabela UF/Estado">${icon('search', 18)}</button>
+      <button class="theme-toggle" data-action="toggle-theme" title="Alternar tema">${currentTheme === 'dark' ? icon('sun', 18) : icon('moon', 18)}</button>
+    </div>
+    <div class="popover" data-popover-id="modelos">
+      <div class="popover-header">Modelos Suportados</div>
+      <table class="popover-table">
+        <thead><tr><th>Cód.</th><th>Modelo</th></tr></thead>
+        <tbody>${modelosRows}</tbody>
+      </table>
+    </div>
+    <div class="popover" data-popover-id="estados">
+      <div class="popover-header">Códigos UF/Estado</div>
+      <div class="popover-scroll">
+        <table class="popover-table">
+          <thead><tr><th>Cód.</th><th>Estado</th></tr></thead>
+          <tbody>${estadosRows}</tbody>
+        </table>
+      </div>
     </div>`;
 }
 
@@ -157,6 +186,7 @@ function renderFields(tab) {
   const cards = fields.map(f => {
     const color = SEG_COLORS[f.key] || 'var(--text-primary)';
     const extraStyle = f.key === 'digitoVerificador' ? 'color: var(--seg-digito)' : `color: ${color}`;
+
     return `
       <div class="field-card" data-field-key="${escapeAttr(f.key)}" data-copy-value="${escapeAttr(f.copyValue)}">
         <span class="field-label">${f.label}</span>
@@ -286,6 +316,7 @@ function bindEvents() {
   const newTabBtn = app.querySelector('[data-action="new-tab"]');
   if (newTabBtn) {
     newTabBtn.addEventListener('click', () => {
+      if (tabs.length >= MAX_TABS) tabs.shift();
       const newTab = { id: nextTabId++, chave: '', parsed: null, validation: null };
       tabs.push(newTab);
       activeTabId = newTab.id;
@@ -465,6 +496,7 @@ function bindEvents() {
   // 13. History item click
   app.querySelectorAll('.history-item[data-history-chave]').forEach(el => {
     el.addEventListener('click', () => {
+      if (tabs.length >= MAX_TABS) tabs.shift();
       const chave = el.dataset.historyChave;
       const parsed = parseChave(chave);
       const validation = parsed ? validarDigito(chave) : null;
@@ -486,7 +518,29 @@ function bindEvents() {
       render();
     });
   }
+
+  // 15. Popover toggle
+  document.querySelectorAll('.toolbar-btn[data-popover]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = btn.dataset.popover;
+      const popover = document.querySelector(`.popover[data-popover-id="${targetId}"]`);
+      if (!popover) return;
+      // Close any other open popovers
+      document.querySelectorAll('.popover.open').forEach(p => {
+        if (p !== popover) p.classList.remove('open');
+      });
+      popover.classList.toggle('open');
+    });
+  });
 }
+
+// --- Close popovers on outside click ---
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.popover') && !e.target.closest('.toolbar-btn')) {
+    document.querySelectorAll('.popover.open').forEach(p => p.classList.remove('open'));
+  }
+});
 
 // --- Global Paste ---
 document.addEventListener('paste', (e) => {
