@@ -2,6 +2,7 @@ import { sanitizeInput, parseChave, validarDigito, getUfDescricao, getTipoEmissa
 import { initTheme, toggleTheme } from './theme.js';
 import { getHistory, addToHistory, clearHistory as clearAllHistory, filterHistory, formatRelativeTime } from './history.js';
 import { icon } from './icons.js';
+import { trackChaveDecomposta, trackLinkCompartilhado, trackCampoCopied, trackTemaAlterado, trackHistoricoUsado, trackNovaAba, trackChaveViaURL, trackChaveViaPaste } from './analytics.js';
 
 function escapeAttr(str) {
   return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -288,6 +289,7 @@ function bindEvents() {
       const newTab = { id: nextTabId++, chave: '', parsed: null, validation: null };
       tabs.push(newTab);
       activeTabId = newTab.id;
+      trackNovaAba();
       render();
       const input = document.querySelector('.chave-input');
       if (input) input.focus();
@@ -299,6 +301,7 @@ function bindEvents() {
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
       currentTheme = toggleTheme();
+      trackTemaAlterado(currentTheme);
       render();
     });
   }
@@ -313,6 +316,7 @@ function bindEvents() {
         tab.parsed = parseChave(tab.chave);
         tab.validation = validarDigito(tab.chave);
         addToHistory({ chave: tab.chave, modelo: tab.parsed.modelo });
+        trackChaveDecomposta(getModeloDescricao(tab.parsed.modelo));
         updateURL();
         render();
       } else {
@@ -394,7 +398,9 @@ function bindEvents() {
         // clicked the copy button specifically
       }
       const value = card.dataset.copyValue;
+      const fieldKey = card.dataset.fieldKey;
       copyToClipboard(value);
+      trackCampoCopied(fieldKey);
       const tooltip = card.querySelector('.copy-tooltip');
       if (tooltip) {
         tooltip.classList.add('show');
@@ -408,6 +414,7 @@ function bindEvents() {
   if (copyLinkBtn) {
     copyLinkBtn.addEventListener('click', () => {
       copyToClipboard(location.href);
+      trackLinkCompartilhado(tabs.filter(t => t.chave.length === 44).length);
       const original = copyLinkBtn.innerHTML;
       copyLinkBtn.innerHTML = `${icon('check', 14)} Link copiado!`;
       setTimeout(() => {
@@ -464,6 +471,7 @@ function bindEvents() {
       const newTab = { id: nextTabId++, chave, parsed, validation };
       tabs.push(newTab);
       activeTabId = newTab.id;
+      trackHistoricoUsado();
       updateURL();
       render();
     });
@@ -494,6 +502,8 @@ document.addEventListener('paste', (e) => {
     tab.parsed = parseChave(cleaned);
     tab.validation = validarDigito(cleaned);
     addToHistory({ chave: cleaned, modelo: tab.parsed.modelo });
+    trackChaveDecomposta(getModeloDescricao(tab.parsed.modelo));
+    trackChaveViaPaste();
     updateURL();
   }
   render();
@@ -512,6 +522,7 @@ function loadFromURL() {
     return { id: nextTabId++, chave, parsed, validation };
   });
   activeTabId = tabs[0].id;
+  trackChaveViaURL(chaves.length);
 }
 
 // --- Init ---
