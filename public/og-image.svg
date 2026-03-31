@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1a1a2e"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#e94560"/>
+
+  <!-- Title -->
+  <text x="600" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#ffffff" text-anchor="middle">Chave de Acesso Compose</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#a0a0b8" text-anchor="middle">Decomposição de Documentos Fiscais Eletrônicos</text>
+
+  <!-- Example key segments -->
+  <rect x="120" y="330" width="960" height="60" rx="8" fill="#16213e"/>
+  <text y="370" font-family="monospace, Courier" font-size="26" text-anchor="start">
+    <tspan x="140" fill="#4ecdc4">35</tspan>
+    <tspan fill="#ffd93d">24</tspan>
+    <tspan fill="#ff6b6b">03</tspan>
+    <tspan fill="#6bcb77">12345678000195</tspan>
+    <tspan fill="#4d96ff">55</tspan>
+    <tspan fill="#9b59b6">001</tspan>
+    <tspan fill="#f39c12">000000123</tspan>
+    <tspan fill="#1abc9c">1</tspan>
+    <tspan fill="#e74c3c">12345678</tspan>
+    <tspan fill="#e94560">0</tspan>
+  </text>
+
+  <!-- Labels -->
+  <text x="140" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#4ecdc4">UF</text>
+  <text x="180" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#ffd93d">Ano</text>
+  <text x="225" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#ff6b6b">Mês</text>
+  <text x="290" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#6bcb77">CNPJ</text>
+  <text x="520" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#4d96ff">Mod.</text>
+  <text x="575" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#9b59b6">Série</text>
+  <text x="650" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#f39c12">Número</text>
+  <text x="810" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#1abc9c">TE</text>
+  <text x="850" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#e74c3c">Cód. Num.</text>
+  <text x="990" y="430" font-family="system-ui, sans-serif" font-size="16" fill="#e94560">DV</text>
+
+  <!-- Badges -->
+  <rect x="340" y="480" width="100" height="36" rx="18" fill="#0f3460"/>
+  <text x="390" y="504" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#4ecdc4" text-anchor="middle">NF-e</text>
+
+  <rect x="460" y="480" width="100" height="36" rx="18" fill="#0f3460"/>
+  <text x="510" y="504" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#ffd93d" text-anchor="middle">CT-e</text>
+
+  <rect x="580" y="480" width="100" height="36" rx="18" fill="#0f3460"/>
+  <text x="630" y="504" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#ff6b6b" text-anchor="middle">NFC-e</text>
+
+  <rect x="700" y="480" width="100" height="36" rx="18" fill="#0f3460"/>
+  <text x="750" y="504" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#6bcb77" text-anchor="middle">MDF-e</text>
+
+  <!-- Footer -->
+  <text x="600" y="580" font-family="system-ui, sans-serif" font-size="18" fill="#555577" text-anchor="middle">Gratuito • Sem cadastro • 100% no navegador</text>
+</svg>

@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chave de Acesso Compose — Decomposição de NF-e, CT-e, MDF-e e mais</title>
   <meta name="description" content="Ferramenta online gratuita para decompor e validar chaves de acesso de documentos fiscais eletrônicos: NF-e, CT-e, NFC-e, MDF-e, BP-e, CF-e SAT, NF3e e CT-e OS.">
-  <meta name="keywords" content="chave de acesso, nfe, cte, nfce, mdfe, bpe, sefaz, nota fiscal eletronica, decomposição, validação, digito verificador, cnpj, consulta nfe">
+  <meta name="keywords" content="chave de acesso, nfe, cte, nfce, mdfe, bpe, sefaz, nota fiscal eletronica, decomposição, validação, digito verificador, cnpj, consulta nfe, chave de acesso nfe, decomposição chave de acesso, validar chave nfe">
+  <meta name="author" content="Heidi Kussakawa">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1a1a2e">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://heidiks.github.io/nfe-chave-acesso-compose/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -17,13 +23,18 @@
   <meta property="og:url" content="https://heidiks.github.io/nfe-chave-acesso-compose/">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Chave de Acesso Compose">
+  <meta property="og:image" content="https://heidiks.github.io/nfe-chave-acesso-compose/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Chave de Acesso Compose — Ferramenta de decomposição de documentos fiscais eletrônicos">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chave de Acesso Compose">
   <meta name="twitter:description" content="Decomponha e valide chaves de acesso de documentos fiscais eletrônicos brasileiros.">
+  <meta name="twitter:image" content="https://heidiks.github.io/nfe-chave-acesso-compose/og-image.png">
 
-  <!-- Structured Data -->
+  <!-- Structured Data: WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -38,7 +49,111 @@
       "price": "0",
       "priceCurrency": "BRL"
     },
-    "inLanguage": "pt-BR"
+    "inLanguage": "pt-BR",
+    "author": {
+      "@type": "Person",
+      "name": "Heidi Kussakawa",
+      "url": "https://github.com/heidiks"
+    },
+    "browserRequirements": "Requires JavaScript",
+    "softwareVersion": "2.0",
+    "featureList": "Decomposição de chave de acesso, Validação de dígito verificador, Suporte a NF-e CT-e NFC-e MDF-e BP-e CF-e SAT NF3e CT-e OS, Múltiplas abas, Histórico local, Tema claro e escuro"
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O que é a chave de acesso de um documento fiscal eletrônico?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A chave de acesso é um código numérico de 44 dígitos que identifica de forma única cada documento fiscal eletrônico (NF-e, CT-e, NFC-e, MDF-e, entre outros) emitido no Brasil. Ela contém informações como o estado de emissão, data, CNPJ do emitente, modelo do documento, série, número e o dígito verificador."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quantos dígitos tem uma chave de acesso?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A chave de acesso possui exatamente 44 dígitos numéricos. Cada grupo de dígitos representa uma informação específica: os 2 primeiros indicam o estado (UF), os 4 seguintes indicam ano e mês de emissão, os 14 seguintes o CNPJ, e assim por diante até o último dígito, que é o verificador."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como é composta a chave de acesso da NF-e?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A chave de acesso da NF-e é composta pelos seguintes campos, nesta ordem: Código da UF (2 dígitos), Ano e Mês de emissão (4 dígitos no formato AAMM), CNPJ do emitente (14 dígitos), Modelo do documento (2 dígitos), Série (3 dígitos), Número do documento (9 dígitos), Tipo de emissão (1 dígito), Código numérico (8 dígitos) e Dígito verificador (1 dígito)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como validar o dígito verificador de uma chave de acesso?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O dígito verificador é calculado usando o módulo 11 sobre os 43 primeiros dígitos da chave. Os pesos são aplicados da direita para a esquerda, na sequência 2, 3, 4, 5, 6, 7, 8, 9, repetindo ciclicamente. Se o resto da divisão por 11 for 0 ou 1, o dígito verificador é 0; caso contrário, é 11 menos o resto. Nossa ferramenta faz essa validação automaticamente."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais modelos de documentos fiscais são suportados?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A ferramenta suporta 8 modelos de documentos fiscais eletrônicos: NF-e (modelo 55), CT-e (modelo 57), MDF-e (modelo 58), CF-e SAT (modelo 59), BP-e (modelo 63), NFC-e (modelo 65), NF3e (modelo 66) e CT-e OS (modelo 67)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A ferramenta é gratuita?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, a ferramenta é completamente gratuita, sem cadastro e sem limitações de uso. Você pode decompor e validar quantas chaves de acesso quiser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Os dados da chave de acesso são armazenados em algum servidor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Não. A ferramenta é totalmente estática e roda 100% no seu navegador. Nenhum dado é enviado para servidores externos. O histórico de chaves consultadas fica salvo apenas no localStorage do seu navegador e pode ser apagado a qualquer momento."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Como decompor uma chave de acesso de documento fiscal",
+    "description": "Passo a passo para decompor e validar uma chave de acesso de NF-e, CT-e ou outro documento fiscal eletrônico usando a ferramenta Chave de Acesso Compose.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Cole ou digite a chave de acesso",
+        "text": "Copie a chave de acesso de 44 dígitos do seu documento fiscal e cole no campo de entrada da ferramenta. Você pode colar com Ctrl+V em qualquer lugar da página."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Visualize os campos decompostos",
+        "text": "A ferramenta automaticamente identifica e exibe cada campo da chave: UF, data de emissão, CNPJ, modelo, série, número, tipo de emissão, código numérico e dígito verificador, cada um com sua cor correspondente."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Verifique a validação do dígito",
+        "text": "O dígito verificador é validado automaticamente usando o algoritmo módulo 11. Um badge indica se o dígito está correto ou incorreto."
+      }
+    ]
   }
   </script>
 
@@ -55,6 +170,74 @@
 </head>
 <body>
   <div id="app"></div>
+
+  <!-- SEO: conteúdo estático visível para crawlers que não executam JavaScript -->
+  <div id="seo-content">
+    <header>
+      <h1>Chave de Acesso Compose — Decomposição de Documentos Fiscais Eletrônicos</h1>
+      <p>Ferramenta online gratuita para <strong>decompor e validar chaves de acesso</strong> de documentos fiscais eletrônicos brasileiros. Suporta <strong>NF-e, CT-e, NFC-e, MDF-e, BP-e, CF-e SAT, NF3e e CT-e OS</strong>.</p>
+    </header>
+
+    <section>
+      <h2>Como funciona a decomposição da chave de acesso</h2>
+      <p>A chave de acesso é um código de <strong>44 dígitos numéricos</strong> presente em todos os documentos fiscais eletrônicos emitidos no Brasil. Cada grupo de dígitos carrega uma informação específica:</p>
+      <ul>
+        <li><strong>UF/Estado</strong> (2 dígitos) — Código IBGE do estado emissor</li>
+        <li><strong>Ano e Mês</strong> (4 dígitos) — Data de emissão no formato AAMM</li>
+        <li><strong>CNPJ</strong> (14 dígitos) — CNPJ do emitente do documento</li>
+        <li><strong>Modelo</strong> (2 dígitos) — Tipo do documento fiscal (55=NF-e, 57=CT-e, 65=NFC-e, etc.)</li>
+        <li><strong>Série</strong> (3 dígitos) — Série do documento</li>
+        <li><strong>Número</strong> (9 dígitos) — Número sequencial do documento</li>
+        <li><strong>Tipo de Emissão</strong> (1 dígito) — Normal, contingência, SCAN, etc.</li>
+        <li><strong>Código Numérico</strong> (8 dígitos) — Código aleatório de segurança</li>
+        <li><strong>Dígito Verificador</strong> (1 dígito) — Calculado pelo módulo 11</li>
+      </ul>
+      <p>Cole ou digite sua chave de acesso no campo acima para ver a decomposição completa com validação automática do dígito verificador.</p>
+    </section>
+
+    <section>
+      <h2>Modelos de documentos fiscais suportados</h2>
+      <table>
+        <thead><tr><th>Código</th><th>Modelo</th></tr></thead>
+        <tbody>
+          <tr><td>55</td><td>NF-e — Nota Fiscal Eletrônica</td></tr>
+          <tr><td>57</td><td>CT-e — Conhecimento de Transporte Eletrônico</td></tr>
+          <tr><td>58</td><td>MDF-e — Manifesto Eletrônico de Documentos Fiscais</td></tr>
+          <tr><td>59</td><td>CF-e SAT — Cupom Fiscal Eletrônico</td></tr>
+          <tr><td>63</td><td>BP-e — Bilhete de Passagem Eletrônico</td></tr>
+          <tr><td>65</td><td>NFC-e — Nota Fiscal de Consumidor Eletrônica</td></tr>
+          <tr><td>66</td><td>NF3e — Nota Fiscal de Energia Elétrica Eletrônica</td></tr>
+          <tr><td>67</td><td>CT-e OS — Conhecimento de Transporte Eletrônico para Outros Serviços</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Perguntas frequentes sobre chave de acesso</h2>
+
+      <h3>O que é a chave de acesso de um documento fiscal eletrônico?</h3>
+      <p>A chave de acesso é um código numérico de 44 dígitos que identifica de forma única cada documento fiscal eletrônico (NF-e, CT-e, NFC-e, MDF-e, entre outros) emitido no Brasil. Ela contém informações como o estado de emissão, data, CNPJ do emitente, modelo do documento, série, número e o dígito verificador.</p>
+
+      <h3>Quantos dígitos tem uma chave de acesso?</h3>
+      <p>A chave de acesso possui exatamente 44 dígitos numéricos. Cada grupo de dígitos representa uma informação específica: os 2 primeiros indicam o estado (UF), os 4 seguintes indicam ano e mês de emissão, os 14 seguintes o CNPJ, e assim por diante até o último dígito, que é o verificador.</p>
+
+      <h3>Como é composta a chave de acesso da NF-e?</h3>
+      <p>A chave de acesso da NF-e é composta pelos seguintes campos, nesta ordem: Código da UF (2 dígitos), Ano e Mês de emissão (4 dígitos no formato AAMM), CNPJ do emitente (14 dígitos), Modelo do documento (2 dígitos), Série (3 dígitos), Número do documento (9 dígitos), Tipo de emissão (1 dígito), Código numérico (8 dígitos) e Dígito verificador (1 dígito).</p>
+
+      <h3>Como validar o dígito verificador de uma chave de acesso?</h3>
+      <p>O dígito verificador é calculado usando o módulo 11 sobre os 43 primeiros dígitos da chave. Os pesos são aplicados da direita para a esquerda, na sequência 2, 3, 4, 5, 6, 7, 8, 9, repetindo ciclicamente. Se o resto da divisão por 11 for 0 ou 1, o dígito verificador é 0; caso contrário, é 11 menos o resto. Nossa ferramenta faz essa validação automaticamente.</p>
+
+      <h3>Quais modelos de documentos fiscais são suportados?</h3>
+      <p>A ferramenta suporta 8 modelos: NF-e (modelo 55), CT-e (modelo 57), MDF-e (modelo 58), CF-e SAT (modelo 59), BP-e (modelo 63), NFC-e (modelo 65), NF3e (modelo 66) e CT-e OS (modelo 67).</p>
+
+      <h3>A ferramenta é gratuita?</h3>
+      <p>Sim, a ferramenta é completamente gratuita, sem cadastro e sem limitações de uso.</p>
+
+      <h3>Os dados da chave de acesso são armazenados em algum servidor?</h3>
+      <p>Não. A ferramenta é totalmente estática e roda 100% no seu navegador. Nenhum dado é enviado para servidores externos. O histórico de chaves consultadas fica salvo apenas no localStorage do seu navegador e pode ser apagado a qualquer momento.</p>
+    </section>
+  </div>
+
   <script type="module" src="./js/app.js"></script>
 </body>
 </html>

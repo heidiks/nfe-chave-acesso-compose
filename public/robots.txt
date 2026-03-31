@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heidiks.github.io/nfe-chave-acesso-compose/sitemap.xml
