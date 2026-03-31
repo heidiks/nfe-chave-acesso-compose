@@ -583,3 +583,7 @@ function loadFromURL() {
 currentTheme = initTheme();
 loadFromURL();
 render();
+
+// Hide SEO-only static content once JS app is running
+const seoContent = document.getElementById('seo-content');
+if (seoContent) seoContent.style.display = 'none';
