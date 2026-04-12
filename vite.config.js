@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: 'src',
-  base: '/nfe-chave-acesso-compose/',
+  base: '/',
   publicDir: '../public',
   build: {
     outDir: '../dist',
